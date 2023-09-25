@@ -5,8 +5,9 @@ import { BsInfoCircle } from 'react-icons/bs';
 
 import { Loader } from './';
 import { TransactionContext } from '../context/TransactionContext';
+import { shortenAddress } from '../utils/shortenAddress';
 
-const commonStyles = 'min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white';
+const companyCommonStyles = 'min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white';
 
 const Input = ({ placeholder, name, type, value, handleChange }) => (
     <input 
@@ -42,31 +43,36 @@ const Welcome = () => {
                     <p className='text-left mt-5 text-white font-light md:w-9/12 w-11/12 text base'>
                         Explore the crypto world. Buy & sell cryptocurrencies easily on Zend
                     </p>
-                    {!currentAccount && <button 
-                    type='button' 
-                    onClick={connectWallet}
-                    className='flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]'
-                    >
-                        <p className='text-white text-base font-semibold'>Connect Wallet</p>
-                    </button>}
+                    {!currentAccount && (
+                        <button 
+                            type='button' 
+                            onClick={connectWallet}
+                            className='flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]'
+                        >
+                            <AiFillPlayCircle className="text-white mr-2" />
+                            <p className='text-white text-base font-semibold'>
+                                Connect Wallet
+                            </p>
+                        </button>
+                    )}
 
                     <div className='grid sm:grid-cols-3 grid-cols-2 w-full mt-10'>
-                        <div className={`rounded-tl-2xl ${commonStyles}`}>
+                        <div className={`rounded-tl-2xl ${companyCommonStyles}`}>
                             Reliability
                         </div>
-                        <div className={commonStyles}>
+                        <div className={companyCommonStyles}>
                             Security
                         </div>
-                        <div className={`rounded-tr-2xl ${commonStyles}`}>
+                        <div className={`sm:rounded-tr-2xl ${companyCommonStyles}`}>
                             Ethereum 
                         </div>
-                        <div className={`rounded-bl-2xl ${commonStyles}`}>
+                        <div className={`sm:rounded-bl-2xl ${companyCommonStyles}`}>
                             Web 3.0
                         </div>
-                        <div className={commonStyles}>
+                        <div className={companyCommonStyles}>
                             Low fees
                         </div>
-                        <div className={`rounded-br-2xl ${commonStyles}`}>
+                        <div className={`sm:rounded-br-2xl ${companyCommonStyles}`}>
                             Blockchain
                         </div>
                     </div>
@@ -83,7 +89,7 @@ const Welcome = () => {
                             </div>
                             <div>
                                 <p className='text-white font-light tex-sm'>
-                                    Wallet Address
+                                    {shortenAddress(currentAccount)}
                                 </p>
                             </div>
                             <div>
@@ -102,9 +108,9 @@ const Welcome = () => {
 
                     <div className='h-[1px] w-full bg-gray-400 my-2' />
                     
-                    {isLoading 
-                    ? <Loader />
-                    : (
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
                         <button 
                         type='button' 
                         onClick={handleSubmit}
