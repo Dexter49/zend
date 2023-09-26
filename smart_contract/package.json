@@ -1,6 +1,5 @@
 {
   "devDependencies": {
-    "@nomicfoundation/hardhat-ethers": "^3.0.4",
     "hardhat": "^2.17.1"
   }
 }
